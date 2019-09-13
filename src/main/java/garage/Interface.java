@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Interface {
 
@@ -31,10 +32,19 @@ public class Interface {
         }while (date==null);
 
         double weight=0;
+        String myWeight = "[0-5]\\.[0-9]{1}";
+
         do {
-            try {
                 System.out.print("Podaj masę pojazdu [t]: ");
                 weight = scan.nextDouble();
+            try{
+                if(Pattern.matches(myWeight,Double.toString(weight))){
+                    break;
+                }
+                else {
+                    System.out.println("Zły format mój throw");
+                    weight =0;
+                }
             }
             catch (NumberFormatException e){
                 System.err.println("Zły format liczby");

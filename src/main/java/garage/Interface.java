@@ -1,5 +1,7 @@
 package garage;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,7 +60,11 @@ public class Interface {
         car_1.setInspection(date);
         car_1.setWeight(weight);
 
-        System.out.println("Podaję dane:");
-        System.out.print(car_1.carData());
+
+        CarList myList = new CarList();
+
+        myList.list.add(car_1);
+
+        System.out.println(myList.list.get(0).carData());
     }
 }

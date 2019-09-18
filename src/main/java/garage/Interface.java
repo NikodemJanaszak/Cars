@@ -88,8 +88,15 @@ public class Interface {
     }
 
     public static void caseShowCar(CarList myList){
+        System.out.println("O którym samochodzie chcesz się czegoś dowiedzieć?");
+        int i=1;
         for(Car c : myList.list) {
-            System.out.println(c.getModel() + " " + c.getMake());
+            System.out.println(i+"."+c.getMake() + " " + c.getModel());
+            i++;
         }
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+
+        myList.printCar(num-1);
     }
 }

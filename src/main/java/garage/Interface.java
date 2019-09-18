@@ -1,6 +1,5 @@
 package garage;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +10,33 @@ import java.util.regex.Pattern;
 public class Interface {
 
     public static void main(String[] arg){
+
+        CarList myList = new CarList();
+        boolean loop = true;
+        while(loop==true) {
+            Integer choice;
+            System.out.println("Co chcesz zrobić?");
+            System.out.println("1. Dodaj auto");
+            System.out.println("2. Pokaż auto");
+            System.out.println("3. Zamknij program");
+            Scanner scanChoice = new Scanner(System.in);
+            choice = scanChoice.nextInt();
+            switch (choice) {
+                case 1:
+                    caseAddCar(myList);
+                    break;
+                case 2:
+                    caseShowCar(myList);
+                    break;
+                default:
+                    System.out.println("Zły wybór");
+                    break;
+            }
+        }
+
+    }
+
+    public static void caseAddCar(CarList myList){
         Car car_1 = new Car();
         Scanner sc = new Scanner(System.in);
         System.out.print("Podaj markę: ");
@@ -37,8 +63,8 @@ public class Interface {
         String myWeight = "[0-5]\\.[0-9]{1}";
 
         do {
-                System.out.print("Podaj masę pojazdu [t]: ");
-                weight = scan.nextDouble();
+            System.out.print("Podaj masę pojazdu [t]: ");
+            weight = scan.nextDouble();
             try{
                 if(Pattern.matches(myWeight,Double.toString(weight))){
                     break;
@@ -53,18 +79,17 @@ public class Interface {
             }
         } while(weight <=0);
 
-
         car_1.setMake(make);
         car_1.setModel(model);
         car_1.setPower(power);
         car_1.setInspection(date);
         car_1.setWeight(weight);
-
-
-        CarList myList = new CarList();
-
         myList.list.add(car_1);
+    }
 
-        System.out.println(myList.list.get(0).carData());
+    public static void caseShowCar(CarList myList){
+        for(Car c : myList.list) {
+            System.out.println(c.getModel() + " " + c.getMake());
+        }
     }
 }
